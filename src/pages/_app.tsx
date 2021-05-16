@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { Hydrate } from 'react-query/hydration';
 
+import theme from '../theme';
+
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   const queryClientRef = useRef<QueryClient>();
   if (!queryClientRef.current) {
@@ -14,7 +16,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   return (
     <QueryClientProvider client={queryClientRef.current}>
       <Hydrate state={pageProps.dehydratedState}>
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
           <Component {...pageProps} />
         </ChakraProvider>
       </Hydrate>
