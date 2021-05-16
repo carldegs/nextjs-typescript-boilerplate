@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { Hydrate } from 'react-query/hydration';
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   const queryClientRef = useRef<QueryClient>();
   if (!queryClientRef.current) {
     queryClientRef.current = new QueryClient();
@@ -21,6 +21,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
-}
+};
 
 export default MyApp;
