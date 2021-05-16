@@ -1,4 +1,4 @@
-import { AnySchema } from '@hapi/joi';
+import Joi, { AnySchema } from '@hapi/joi';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useForm, UseFormProps, UseFormReturn } from 'react-hook-form';
 
@@ -12,7 +12,7 @@ const useJoiForm = <T>(
     reValidateMode: 'onChange',
     defaultValues: defaultValues as any,
     criteriaMode: 'all',
-    resolver: joiResolver(schema, { abortEarly: false }),
+    resolver: joiResolver(Joi.object(schema), { abortEarly: false }),
     ...options,
   });
 

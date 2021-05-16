@@ -1,11 +1,11 @@
-import { QuestionIcon } from '@chakra-ui/icons';
+import { QuestionIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import {
   Box,
-  Button,
   FormControl,
   FormErrorMessage,
   FormHelperText,
   FormLabel,
+  IconButton,
   Input,
   InputGroup,
   InputProps,
@@ -34,6 +34,7 @@ interface RegInputProps extends InputProps {
   helperText?: any;
   helpButton?: boolean;
 }
+
 const RegInput: React.FC<RegInputProps> = ({
   label,
   error,
@@ -91,23 +92,21 @@ const RegInput: React.FC<RegInputProps> = ({
       <InputGroup width={width}>
         <Input
           variant={variant || 'flushed'}
-          name={name}
           id={name}
           type={finalType}
-          ref={register as any}
           data-testid={name}
+          {...register(name)}
           {...props}
         />
         {type === 'password' && (
-          <InputRightElement width="4.5rem">
+          <InputRightElement>
             <Stack isInline>
-              <Button
-                h="1.75rem"
+              <IconButton
                 size="sm"
+                aria-label={showPassword ? 'Hide Password' : 'Show Password'}
+                icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
                 onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? 'Hide' : 'Show'}
-              </Button>
+              />
               {rightButton}
             </Stack>
           </InputRightElement>
