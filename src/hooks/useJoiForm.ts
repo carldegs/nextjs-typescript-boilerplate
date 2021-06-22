@@ -1,22 +1,9 @@
-import Joi, { AnySchema } from '@hapi/joi';
-import { joiResolver } from '@hookform/resolvers/joi';
-import { useForm, UseFormProps, UseFormReturn } from 'react-hook-form';
+import { useForm, UseFormReturn } from 'react-hook-form';
 
-const useJoiForm = <T>(
-  defaultValues: T,
-  schema?: Record<keyof T, AnySchema>,
-  options?: UseFormProps<T>
-): UseFormReturn<T> => {
-  const results = useForm<T>({
-    mode: 'onSubmit',
-    reValidateMode: 'onChange',
-    defaultValues: defaultValues as any,
-    criteriaMode: 'all',
-    resolver: joiResolver(Joi.object(schema), { abortEarly: false }),
-    ...options,
-  });
+import { FormObject } from '../formHandlers/FormObject';
 
-  return results;
+const useJoiForm = <T>(formObject: FormObject<T>): UseFormReturn<T> => {
+  return useForm<T>(formObject.getHookOptions());
 };
 
 export default useJoiForm;

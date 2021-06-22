@@ -11,8 +11,10 @@ It includes the following libraries/frameworks:
 
 The following are also setup:
 
-- Added `useJoiForm` that assists in using `useForm` with a `joiResolver`.
-- Addded `<RegInput />` which can help create `FormControl`s used with `react-hook-form`.
+- Added `useJoiForm` that assists in using `useForm` with a `joiResolver`. This uses a custom class `FormObject` that would also assist you in creating the default values and schemas of your form.
+- Addded `<QFormControl />` which can help create `FormControl`s already integrated with `react-hook-form`. To use this:
+  - you must wrap them in a `<FormProvider />`. More info [here](https://react-hook-form.com/api/useformcontext).
+  - For nested or complex inputs (e.g, using `<InputGroup />`), use the control prop to set what component should be registered.
 - Chakra UI theme extended with a custom scrollbar and a full-height html page.
 - Custom Layout component with Sidebar
 - ESLint setup using recommended rules
