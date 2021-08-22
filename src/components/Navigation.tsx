@@ -1,58 +1,68 @@
 import { Avatar } from '@chakra-ui/avatar';
-import { Divider, Flex, Heading, Spacer, Text } from '@chakra-ui/layout';
+import { Flex, Heading, Spacer, Text } from '@chakra-ui/layout';
 import { Menu, MenuItem, MenuList } from '@chakra-ui/menu';
-import { MenuButton } from '@chakra-ui/react';
+import { Button, Container, FlexProps, MenuButton } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+
+import { hideOnMobile } from '../constants';
 
 const NAVBAR_HEIGHT = '60px';
 
-const Navigation: React.FC = () => {
+const Navigation: React.FC<
+  FlexProps & { hideNav?: boolean; hideLogin?: boolean }
+> = ({ children, hideNav, hideLogin, ...props }) => {
   const router = useRouter();
-  const name = 'lorem.ipsum';
+  const [isLoggedIn, setLoggedIn] = useState(true);
+  const username = 'lorem.ipsum';
 
   return (
-    <Flex
-      as="header"
-      bg="gray.900"
-      alignItems="center"
-      justifyContent="center"
-      h={NAVBAR_HEIGHT}
-      w="full"
-      position="sticky"
-    >
-      <Heading
-        color="cyan.700"
-        fontSize="3xl"
-        ml={4}
-        onClick={() => router.push('/')}
-        cursor="pointer"
+    <Container maxW="container.xl">
+      <Flex
+        as="header"
+        alignItems="center"
+        h={NAVBAR_HEIGHT}
+        w="full"
+        pos="sticky"
+        top={0}
+        {...props}
       >
-        Site Title
-      </Heading>
+        <Heading
+          color="cyan.700"
+          fontSize={{ base: 'xl', lg: '2xl' }}
+          onClick={() => router.push('/')}
+          cursor="pointer"
+        >
+          DAMI MONG ALAM
+        </Heading>
 
-      <Spacer />
+        <Spacer />
 
-      <Divider orientation="vertical" h={NAVBAR_HEIGHT} />
-      <Menu>
-        <MenuButton>
-          <Flex mx={4} cursor="pointer" alignItems="center">
-            <Avatar size="sm" name={name} mr={2} />
-            <Text
-              color="cyan.100"
-              lineHeight="32px"
-              verticalAlign="middle"
-              mr={4}
-              fontWeight="medium"
-            >
-              {name}
-            </Text>
-          </Flex>
-        </MenuButton>
-        <MenuList>
-          <MenuItem>Logout</MenuItem>
-        </MenuList>
-      </Menu>
-    </Flex>
+        {isLoggedIn ? (
+          <Menu>
+            <MenuButton>
+              <Flex cursor="pointer" alignItems="center">
+                <Avatar size="sm" name={username} mr={{ base: 0, lg: 2 }} />
+                <Text
+                  color="cyan.100"
+                  lineHeight="32px"
+                  verticalAlign="middle"
+                  fontWeight="medium"
+                  {...hideOnMobile}
+                >
+                  {username}
+                </Text>
+              </Flex>
+            </MenuButton>
+            <MenuList>
+              <MenuItem onClick={() => setLoggedIn(false)}>Logout</MenuItem>
+            </MenuList>
+          </Menu>
+        ) : (
+          <Button onClick={() => setLoggedIn(true)}>Login</Button>
+        )}
+      </Flex>
+    </Container>
   );
 };
 
