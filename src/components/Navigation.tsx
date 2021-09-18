@@ -33,7 +33,7 @@ const Navigation: React.FC<
           onClick={() => router.push('/')}
           cursor="pointer"
         >
-          DAMI MONG ALAM
+          TEST
         </Heading>
 
         <Spacer />

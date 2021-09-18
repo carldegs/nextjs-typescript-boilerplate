@@ -16,6 +16,7 @@ The following are also setup:
   - you must wrap them in a `<FormProvider />`. More info [here](https://react-hook-form.com/api/useformcontext).
   - For nested or complex inputs (e.g, using `<InputGroup />`), use the control prop to set what component should be registered.
 - Chakra UI theme extended with a custom scrollbar and a full-height html page.
-- Custom Layout component with Sidebar
+- Custom Layout component that handles different layout options with a navbar and footer
+  - To include footers in the layout, uncomment them in `/components/Layout.tsx`
 - ESLint setup using recommended rules
 - Custom prettier rules that includes automatic sorting of imports
