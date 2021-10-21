@@ -20,3 +20,4 @@ The following are also setup:
   - To include footers in the layout, uncomment them in `/components/Layout.tsx`
 - ESLint setup using recommended rules
 - Custom prettier rules that includes automatic sorting of imports
+- Added `next-connect` and `createApiHandler` for handling api calls

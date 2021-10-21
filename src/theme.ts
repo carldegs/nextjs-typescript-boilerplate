@@ -5,13 +5,6 @@ const theme = extendTheme({
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-  components: {
-    Heading: {
-      baseStyle: {
-        fontWeight: 900,
-      },
-    },
-  },
   styles: {
     global: {
       html: {

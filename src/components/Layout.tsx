@@ -1,17 +1,18 @@
-import { Box, Grid } from '@chakra-ui/layout';
-import { BoxProps, GridProps, Container } from '@chakra-ui/react';
+import { Box, Container, Grid } from '@chakra-ui/layout';
+import { BoxProps, GridProps } from '@chakra-ui/react';
 import Head from 'next/head';
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
+import Footer from './Footer';
 import Navigation from './Navigation';
 
-enum LayoutVariant {
-  scrollable = 'scrollable', // Default. Page is scrollable.
-  fullPage = 'fullPage', // Layout, including the footer, covers the screen height.
-  fullContent = 'fullContent', // The header and content will cover the screen height. User must scroll to see the header.
-}
+const LayoutVariant = {
+  scrollable: 'scrollable', // Default. Page is scrollable.
+  fullPage: 'fullPage', // Layout, including the footer, covers the screen height.
+  fullContent: 'fullContent', // The header and content will cover the screen height. User must scroll to see the header.
+};
 
 interface MetaProps {
   url: string;
@@ -23,9 +24,11 @@ interface MetaProps {
 interface LayoutProps {
   pageTitle?: string;
   head?: JSX.Element;
-  variant?: `${LayoutVariant}`;
+  variant?: keyof typeof LayoutVariant;
+  showDashNav?: boolean;
   gridProps?: GridProps;
   mainProps?: BoxProps;
+  recaptcha?: boolean;
   hideNavButtons?: boolean | 'header' | 'footer';
   hideLogin?: boolean;
   affixTitle?: boolean;
@@ -40,11 +43,8 @@ const Layout: React.FC<LayoutProps> = ({
   variant = LayoutVariant.scrollable,
   gridProps,
   mainProps,
-  hideNavButtons,
-  hideLogin,
   affixTitle = true,
   container = false,
-  // TODO: Add option to setup default metadata
   metadata = {},
 }) => {
   const [title, setTitle] = useState('');
@@ -52,7 +52,7 @@ const Layout: React.FC<LayoutProps> = ({
   useEffect(() => {
     setTitle(
       `${pageTitle}${affixTitle && pageTitle ? ' | ' : ''}${
-        affixTitle ? 'Dami mong alam!' : ''
+        affixTitle ? 'Create Next App' : ''
       }`
     );
   }, [affixTitle, pageTitle]);
@@ -61,11 +61,7 @@ const Layout: React.FC<LayoutProps> = ({
 
   return (
     <>
-      <Navigation
-        zIndex="sticky"
-        hideNav={hideNavButtons === true || hideNavButtons === 'header'}
-        hideLogin={hideLogin}
-      />
+      <Navigation zIndex="sticky" />
       <Grid
         gridTemplateRows={LayoutVariant.scrollable ? 'auto auto' : '1fr auto'}
         overflow={variant === LayoutVariant.fullPage ? 'hidden' : 'inherit'}
@@ -75,7 +71,7 @@ const Layout: React.FC<LayoutProps> = ({
           as="main"
           h={
             variant === LayoutVariant.fullContent
-              ? 'calc(100vh - 88px)'
+              ? 'calc(100vh - 60px)'
               : 'full'
           }
           maxW={container && 'container.xl'}
@@ -94,17 +90,9 @@ const Layout: React.FC<LayoutProps> = ({
           </Head>
           {children}
         </Wrapper>
-        {/* {variant !== LayoutVariant.fullContent && (
-          <Footer
-            hideNav={hideNavButtons === true || hideNavButtons === 'footer'}
-          />
-        )} */}
+        {variant !== LayoutVariant.fullContent && <Footer />}
       </Grid>
-      {/* {variant === LayoutVariant.fullContent && (
-        <Footer
-          hideNav={hideNavButtons === true || hideNavButtons === 'footer'}
-        />
-      )} */}
+      {variant === LayoutVariant.fullContent && <Footer />}
     </>
   );
 };

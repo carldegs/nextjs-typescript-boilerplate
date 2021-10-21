@@ -1,29 +1,22 @@
-import { Avatar } from '@chakra-ui/avatar';
-import { Flex, Heading, Spacer, Text } from '@chakra-ui/layout';
-import { Menu, MenuItem, MenuList } from '@chakra-ui/menu';
-import { Button, Container, FlexProps, MenuButton } from '@chakra-ui/react';
+import { Flex, Heading, Text } from '@chakra-ui/layout';
+import { Container, FlexProps, Spacer } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-
-import { hideOnMobile } from '../constants';
 
 const NAVBAR_HEIGHT = '60px';
 
-const Navigation: React.FC<
-  FlexProps & { hideNav?: boolean; hideLogin?: boolean }
-> = ({ children, hideNav, hideLogin, ...props }) => {
+const Navigation: React.FC<FlexProps> = (props) => {
   const router = useRouter();
-  const [isLoggedIn, setLoggedIn] = useState(true);
-  const username = 'lorem.ipsum';
 
   return (
     <Container maxW="container.xl">
       <Flex
         as="header"
         alignItems="center"
+        justifyContent="center"
+        bg="gray.900"
         h={NAVBAR_HEIGHT}
         w="full"
-        pos="sticky"
+        position="sticky"
         top={0}
         {...props}
       >
@@ -33,34 +26,10 @@ const Navigation: React.FC<
           onClick={() => router.push('/')}
           cursor="pointer"
         >
-          TEST
+          Create Next App
         </Heading>
-
         <Spacer />
-
-        {isLoggedIn ? (
-          <Menu>
-            <MenuButton>
-              <Flex cursor="pointer" alignItems="center">
-                <Avatar size="sm" name={username} mr={{ base: 0, lg: 2 }} />
-                <Text
-                  color="cyan.100"
-                  lineHeight="32px"
-                  verticalAlign="middle"
-                  fontWeight="medium"
-                  {...hideOnMobile}
-                >
-                  {username}
-                </Text>
-              </Flex>
-            </MenuButton>
-            <MenuList>
-              <MenuItem onClick={() => setLoggedIn(false)}>Logout</MenuItem>
-            </MenuList>
-          </Menu>
-        ) : (
-          <Button onClick={() => setLoggedIn(true)}>Login</Button>
-        )}
+        <Text color="cyan.700">User</Text>
       </Flex>
     </Container>
   );
