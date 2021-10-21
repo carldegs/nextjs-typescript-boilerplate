@@ -1,25 +1,23 @@
-import { Flex, Heading, Text } from '@chakra-ui/layout';
-import { Container, FlexProps, Spacer } from '@chakra-ui/react';
+import { Box, Heading, Text } from '@chakra-ui/layout';
+import { Container, BoxProps, Spacer } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 const NAVBAR_HEIGHT = '60px';
 
-const Navigation: React.FC<FlexProps> = (props) => {
+const Navigation: React.FC<BoxProps> = (props) => {
   const router = useRouter();
 
   return (
-    <Container maxW="container.xl">
-      <Flex
-        as="header"
-        alignItems="center"
-        justifyContent="center"
-        bg="gray.900"
-        h={NAVBAR_HEIGHT}
-        w="full"
-        position="sticky"
-        top={0}
-        {...props}
-      >
+    <Box
+      as="header"
+      bg="gray.900"
+      h={NAVBAR_HEIGHT}
+      w="full"
+      position="sticky"
+      top={0}
+      {...props}
+    >
+      <Container h="full" maxW="container.xl" display="flex" alignItems="center" justifyContent="center">
         <Heading
           color="cyan.700"
           fontSize={{ base: 'xl', lg: '2xl' }}
@@ -30,8 +28,8 @@ const Navigation: React.FC<FlexProps> = (props) => {
         </Heading>
         <Spacer />
         <Text color="cyan.700">User</Text>
-      </Flex>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 
