@@ -17,7 +17,13 @@ const Navigation: React.FC<BoxProps> = (props) => {
       top={0}
       {...props}
     >
-      <Container h="full" maxW="container.xl" display="flex" alignItems="center" justifyContent="center">
+      <Container
+        h="full"
+        maxW="container.xl"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
         <Heading
           color="cyan.700"
           fontSize={{ base: 'xl', lg: '2xl' }}
