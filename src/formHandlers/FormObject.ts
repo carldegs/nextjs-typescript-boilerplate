@@ -1,4 +1,4 @@
-import { joiResolver } from '@hookform/resolvers/joi';
+import { joiResolver } from '@hookform/resolvers/joi/dist/joi';
 import Joi, { AnySchema } from 'joi';
 import { DeepPartial, UnpackNestedValue, UseFormProps } from 'react-hook-form';
 
