@@ -13,15 +13,15 @@ const Navigation: React.FC = () => {
   return (
     <Flex
       as="header"
-      bg="gray.900"
       alignItems="center"
       justifyContent="center"
       h={NAVBAR_HEIGHT}
       w="full"
       position="sticky"
+      bg="gray.900"
     >
       <Heading
-        color="cyan.700"
+        color="white"
         fontSize="3xl"
         ml={4}
         onClick={() => router.push('/')}
@@ -38,7 +38,7 @@ const Navigation: React.FC = () => {
           <Flex mx={4} cursor="pointer" alignItems="center">
             <Avatar size="sm" name={name} mr={2} />
             <Text
-              color="cyan.100"
+              color="white"
               lineHeight="32px"
               verticalAlign="middle"
               mr={4}

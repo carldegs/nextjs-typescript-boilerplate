@@ -1,7 +1,7 @@
 import { Flex, Heading } from '@chakra-ui/layout';
 import Head from 'next/head';
 
-import Layout from '../components/Layout';
+import Layout from '../layouts/Layout';
 
 const Home: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ const Home: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Flex h="full" bg="cyan.500" alignItems="center" justifyContent="center">
+      <Flex h="full" alignItems="center" justifyContent="center">
         <Heading>Hello there, Kenobi!</Heading>
       </Flex>
     </Layout>
