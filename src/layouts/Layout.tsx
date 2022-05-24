@@ -1,7 +1,7 @@
 import { Box, Grid } from '@chakra-ui/layout';
 import React from 'react';
 
-import Navigation from '../organisms/Navigation';
+import Navigation from '../components/Navigation';
 
 const Layout: React.FC = ({ children }) => (
   <Grid gridTemplateRows="auto 1fr" h="100vh" overflowY="hidden">

@@ -19,3 +19,125 @@ The following are also setup:
 - Custom Layout component with Sidebar
 - ESLint setup using recommended rules
 - Custom prettier rules that includes automatic sorting of imports
+
+## Sample Form Handler
+
+### Creating the Form Handler
+
+```typescript
+interface UserProfile {
+  firstName: string;
+  lastName: string;
+  age: number;
+  gender: GenderDemographicsEnum;
+  yearsInCurrRole: number;
+}
+
+export default new FormObject<UserProfile>(
+  {
+    firstName: '',
+    lastName: '',
+    age: null,
+    gender: null,
+    yearsInCurrRole: null,
+  },
+  {
+    firstName: Joi.string()
+      .required()
+      .messages(createErrorMessages('First Name', ['emptyString'])),
+    lastName: Joi.string()
+      .required()
+      .messages(createErrorMessages('Last Name', ['emptyString'])),
+    age: Joi.number()
+      .min(MIN_AGE)
+      .required()
+      .messages(
+        createErrorMessages('Age', [
+          'notNumber',
+          { type: 'lessThanMin', min: MIN_AGE },
+        ])
+      ),
+    gender: Joi.string()
+      .valid(...Object.values(GenderDemographicsEnum))
+      .messages(createErrorMessages('Gender', ['emptyString', 'notOption'])),
+    yearsInCurrRole: Joi.number()
+      .min(MIN_YEARS_IN_CURR_ROLE)
+      .required()
+      .messages(
+        createErrorMessages('Field', [
+          'notNumber',
+          { type: 'lessThanMin', min: MIN_YEARS_IN_CURR_ROLE },
+        ])
+      ),
+  }
+);
+```
+
+### Using the Form Handler
+
+```typescript
+  const EditProfile: React.FC = () => {    
+    const methods = useJoiForm(profileFormObject);
+    
+    return (
+      <FormProvider {...methods}>
+        <QFormControl
+          name="firstName"
+          label="First Name"
+          isRequired
+          flex={1}
+        >
+          <Input variant="flushed" />
+        </QFormControl>
+
+        <QFormControl
+          name="lastName"
+          label="Last Name"
+          isRequired
+          flex={1}
+        >
+          <Input variant="flushed" />
+        </QFormControl>
+
+        /* ... */
+      </FormProvider>
+    )
+  }
+```
+
+## API Handlers
+
+Use the `createApiHandler` to easily create your api routes.
+
+```typescript
+// /pages/api/users/[id].ts
+
+const UserHandler = createApiHandler().get(async (req, res) => {
+  const { id } = req.query;
+
+  if (isInvalid(id)) {
+    throw new Error('ID invalid');
+  }
+
+  const userData = getData(id);
+
+  return res.json(userData);
+}).post(async (req, res) => {
+  // ...
+}).put(async (req, res) => {
+  // ...
+})
+//...
+```
+
+## API Errors
+
+Extend the `APIError` class at `/src/lib/errors/APIError` when creating custom errors.
+
+```typescript
+export class ListingNotFoundError extends ApiError {
+  constructor(id: string) {
+    super(404, `Listing of ${id} was not found.`);
+  }
+}
+```
