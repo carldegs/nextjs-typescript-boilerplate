@@ -22,12 +22,13 @@ const Navigation: React.FC = () => {
     >
       <Heading
         color="white"
-        fontSize="3xl"
+        fontSize="2xl"
         ml={4}
         onClick={() => router.push('/')}
         cursor="pointer"
+        letterSpacing="tighter"
       >
-        Site Title
+        site.
       </Heading>
 
       <Spacer />
@@ -36,14 +37,8 @@ const Navigation: React.FC = () => {
       <Menu>
         <MenuButton>
           <Flex mx={4} cursor="pointer" alignItems="center">
-            <Avatar size="sm" name={name} mr={2} />
-            <Text
-              color="white"
-              lineHeight="32px"
-              verticalAlign="middle"
-              mr={4}
-              fontWeight="medium"
-            >
+            <Avatar size="sm" name={name} mr={2} bg="blue.800" />
+            <Text color="white" lineHeight="32px" verticalAlign="middle" mr={4}>
               {name}
             </Text>
           </Flex>
