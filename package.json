@@ -10,7 +10,8 @@
     "postinstall": "yarn gen:theme-typings",
     "format": "prettier --write .",
     "prepare": "husky install",
-    "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo"
+    "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
+    "execute-husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\""
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.1",
