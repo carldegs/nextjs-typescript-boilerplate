@@ -2,4 +2,4 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 echo 'running pre-commit checks...'
-npx lint-staged -q
+FORCE_COLOR=0 npx lint-staged 
