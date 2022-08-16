@@ -12,9 +12,7 @@ const Layout: React.FC<LayoutProps> = ({ children, fullHeight }) => (
   <Grid
     gridTemplateRows="auto 1fr"
     h={fullHeight && '100vh'}
-    
     overflowY={fullHeight ? 'hidden' : 'auto'}
-    
   >
     <Navigation />
     <Box as="main" overflowY="hidden">

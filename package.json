@@ -10,8 +10,7 @@
     "postinstall": "yarn gen:theme-typings",
     "format": "prettier --write .",
     "prepare": "husky install",
-    "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
-    "execute-husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\""
+    "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.1",
@@ -44,7 +43,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "husky": "^8.0.1",
+    "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
     "prettier": "^2.5.1",
     "typescript": "4.5.5"
@@ -55,9 +54,9 @@
     }
   },
   "lint-staged": {
-    "./src/*.{ts,tsx,js,jsx}": [
-      "prettier --write .",
-      "eslint ."
+    "src/**/*.{ts,tsx,js,jsx}": [
+      "prettier --write",
+      "eslint --fix"
     ]
   }
 }
