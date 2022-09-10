@@ -25,16 +25,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',
-    'jsx-a11y/label-has-associated-control': [
-      'error',
-      {
-        labelComponents: [],
-        labelAttributes: [],
-        controlComponents: [],
-        assert: 'either',
-        depth: 25,
-      },
-    ],
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': [
       'error',
